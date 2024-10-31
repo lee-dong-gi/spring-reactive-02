@@ -11,8 +11,8 @@ import reactor.core.publisher.Flux;
 public class RangeExample03 {
     public static void main(String[] args) {
         Flux
-            .range(7, 5)
-            .map(idx -> SampleData.btcTopPricesPerYear.get(idx))
+            .range(7, 5) // 7부터 이후 5개
+            .map(SampleData.btcTopPricesPerYear::get)
             .subscribe(tuple -> Logger.onNext(tuple.getT1() + "'s: " + tuple.getT2()));
     }
 }

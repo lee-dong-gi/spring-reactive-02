@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 public class JustOrEmptyExample01 {
     public static void main(String[] args) {
         Mono
-            .just(null)
+            .just(null) // NPE 발생
             .log()
             .subscribe(Logger::onNext);
     }

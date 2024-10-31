@@ -13,9 +13,9 @@ import reactor.core.publisher.Mono;
 public class UsingExample01 {
     public static void main(String[] args) {
         Mono
-                .using(() -> "Resource",
-                        resource -> Mono.just(resource),
-                        resource -> Logger.info("cleanup: {}", resource)
+                .using(() -> "Resource", // resource 선언
+                        resource -> Mono.just(resource), // resource 사용
+                        resource -> Logger.info("cleanup: {}", resource) // resource 해제
                 )
                 .subscribe(Logger::onNext);
     }

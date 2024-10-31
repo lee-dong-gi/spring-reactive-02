@@ -17,10 +17,10 @@ public class CreateExample03 {
 
     public static void main(String[] args) {
         Flux.create((FluxSink<Integer> emitter) -> {
-            emitter.onRequest(n -> {
+            emitter.onRequest(n -> { // n은 처리가능 개수, 밑에서 지정함 prefetch의 수
                 Logger.info("# requested: " + n);
                 TimeUtils.sleep(500L);
-                for (int i = start; i <= end; i++) {
+                for (int i = start; i <= end; i++) { // 4건의 데이터 emit
                     emitter.next(i);
                 }
                 start += 4;
@@ -30,10 +30,10 @@ public class CreateExample03 {
             emitter.onDispose(() -> {
                 Logger.info("# clean up");
             });
-        }, FluxSink.OverflowStrategy.DROP)
+        }, FluxSink.OverflowStrategy.DROP) // 2건 초과해서 emit되는 경우 drop함
         .subscribeOn(Schedulers.boundedElastic())
-        .publishOn(Schedulers.parallel(), 2)
-        .subscribe(data -> {
+        .publishOn(Schedulers.parallel(), 3) // 2는 스레드에서 한번에 2건 처리하겠다는 의미
+        .subscribe(data -> { // 결과적으로 2건은 정상처리되고 2건은 drop됨
             Logger.onNext(data);
         });
 

@@ -19,7 +19,7 @@ public class DeferExample02 {
         Mono
             .just("Hello")
             .delayElement(Duration.ofSeconds(2))
-            .switchIfEmpty(sayDefault())
+            .switchIfEmpty(sayDefault()) // defer를 안써서 호출됨, 불필요한 호출발생
             .subscribe(Logger::onNext);
 
         TimeUtils.sleep(2500);

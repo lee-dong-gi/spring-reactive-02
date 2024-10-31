@@ -12,11 +12,11 @@ import reactor.core.publisher.Flux;
 public class GenerateExample01 {
     public static void main(String[] args) {
         Flux
-            .generate(() -> 0, (state, sink) -> {
-                sink.next(state);
-                if (state == 10)
+            .generate(() -> 0, (state, sink) -> { // state가 0 부터 시작해서 순차적으로 실행
+                sink.next(state); // downstream으로 emit
+                if (state == 10) // 10 이면 종료
                     sink.complete();
-                return ++state;
+                return ++state; // state 증가 후 리턴
             })
             .subscribe(Logger::onNext);
     }

@@ -16,8 +16,9 @@ public class DeferExample03 {
         Logger.info("# Start");
         Mono
                 .just("Hello")
+//                .justOrEmpty(null)
                 .delayElement(Duration.ofSeconds(3))
-                .switchIfEmpty(Mono.defer(() -> sayDefault()))
+                .switchIfEmpty(Mono.defer(() -> sayDefault()))// 여기서 실행안되고 조건에 맞고 구독할때 실행됨
                 .subscribe(Logger::onNext);
 
         TimeUtils.sleep(3500);

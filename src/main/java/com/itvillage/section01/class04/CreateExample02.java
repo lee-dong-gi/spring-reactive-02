@@ -11,8 +11,10 @@ import java.util.List;
 /**
  * create 개념 이해 예제
  *  - Subscriber의 request와 상관없이 next signal 이벤트를 발생하는 예제
+ *
  */
 public class CreateExample02 {
+    // Downstream 쪽에서 데이터를 요청하지 않아도 create 오퍼레이터 내부에서 데이터를 emit하는 예제 코드
     public static void main(String[] args) {
         Logger.info("# start");
 
