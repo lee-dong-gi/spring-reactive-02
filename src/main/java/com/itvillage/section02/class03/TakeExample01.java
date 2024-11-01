@@ -15,7 +15,7 @@ public class TakeExample01 {
         Flux
             .interval(Duration.ofSeconds(1))
             .doOnNext(Logger::doOnNext)
-            .take(3)
+            .take(3) // 3개(0,1,2) 까지 emit하고 이후 emit하지 않음
             .subscribe(Logger::onNext);
 
         TimeUtils.sleep(5000L);

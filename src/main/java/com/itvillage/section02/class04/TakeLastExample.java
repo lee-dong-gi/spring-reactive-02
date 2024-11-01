@@ -12,7 +12,7 @@ public class TakeLastExample {
     public static void main(String[] args) {
         Flux
             .fromIterable(SampleData.btcTopPricesPerYear)
-            .takeLast(2)
+            .takeLast(2) // 가장 마지막에 emit된 2개만 emit
             .subscribe(tuple -> Logger.onNext(tuple.getT1(), tuple.getT2()));
     }
 }

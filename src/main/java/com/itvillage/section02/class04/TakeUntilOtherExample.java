@@ -15,7 +15,7 @@ import java.time.Duration;
 public class TakeUntilOtherExample {
     public static void main(String[] args) {
         Flux.interval(Duration.ofMillis(300))
-                .takeUntilOther(doSomeTask())
+                .takeUntilOther(doSomeTask()) // onNext 또는 onComplete 시그널 발생할때까지 전달
                 .subscribe(Logger::onNext);
 
         TimeUtils.sleep(2000);

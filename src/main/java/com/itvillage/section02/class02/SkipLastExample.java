@@ -12,7 +12,7 @@ public class SkipLastExample {
     public static void main(String[] args) {
         Flux
             .fromIterable(SampleData.btcTopPricesPerYear)
-            .skipLast(2)
+            .skipLast(2) // 마지막에 emit된 2건을 건너뜀
             .subscribe(tuple -> Logger.onNext(tuple.getT1(), tuple.getT2()));
     }
 }

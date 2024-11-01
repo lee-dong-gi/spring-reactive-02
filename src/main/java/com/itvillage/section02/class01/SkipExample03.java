@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
  */
 public class SkipExample03 {
     public static void main(String[] args) {
-        Flux
+        Flux // 20_000_000이상인 데이터 2개 건너뛰고 나머지 출력
             .fromIterable(SampleData.btcTopPricesPerYear)
             .filter(tuple -> tuple.getT2() >= 20_000_000)
             .skip(2)

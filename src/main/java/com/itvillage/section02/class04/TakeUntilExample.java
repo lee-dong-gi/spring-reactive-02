@@ -13,7 +13,7 @@ public class TakeUntilExample {
     public static void main(String[] args) {
         Flux
             .fromIterable(SampleData.btcTopPricesPerYear)
-            .takeUntil(tuple -> tuple.getT2() > 10_000_000)
+            .takeUntil(tuple -> tuple.getT2() > 10_000_000) // 해당 조건을 만족할때까지 전달(조건값 포함), 만족한 이후는 하지않음
             .subscribe(tuple -> Logger.onNext(tuple.getT1(), tuple.getT2()));
     }
 }

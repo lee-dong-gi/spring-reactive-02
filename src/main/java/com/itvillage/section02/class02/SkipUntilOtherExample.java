@@ -14,13 +14,13 @@ import java.time.Duration;
 public class SkipUntilOtherExample {
     public static void main(String[] args) {
         Flux.interval(Duration.ofSeconds(1))
-                .skipUntilOther(doSomeTask())
+                .skipUntilOther(doSomeTask()) // 0,1 건너뛰고 2,3만 출력 onNext 또는 onComplete 시그널 발생한 이후 전달
                 .subscribe(Logger::onNext);
 
         TimeUtils.sleep(4000);
     }
 
     private static Publisher<?> doSomeTask() {
-        return Mono.empty().delay(Duration.ofMillis(2500));
+        return Mono.empty().delay(Duration.ofMillis(2500)); // 2.5초 뒤 onComplete signal 발생
     }
 }

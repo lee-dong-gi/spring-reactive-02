@@ -14,8 +14,8 @@ public class SkipExample02 {
     public static void main(String[] args) {
         Flux
             .interval(Duration.ofSeconds(1))
-            .skip(Duration.ofMillis(2500))
-            .subscribe(Logger::onNext);
+            .skip(Duration.ofMillis(2500)) // 2.5초간 건너뜀
+            .subscribe(Logger::onNext); // 0,1 건너뛰고 2부터 찍힘
 
         TimeUtils.sleep(5000L);
     }

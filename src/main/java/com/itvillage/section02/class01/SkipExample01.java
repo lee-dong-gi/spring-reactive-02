@@ -15,9 +15,9 @@ public class SkipExample01 {
         Flux
             .interval(Duration.ofSeconds(1))
             .doOnNext(Logger::doOnNext)
-            .skip(3)
-            .subscribe(Logger::onNext);
+            .skip(3) // 처음부터 3개의 데이터를 건너뛰고 emit함
+            .subscribe(Logger::onNext); // 0,1,2건너고 3부터 출력됨
 
-        TimeUtils.sleep(5000L);
+        TimeUtils.sleep(5000L);// 스레드가 5초동안 작동하게하기 위해서
     }
 }
