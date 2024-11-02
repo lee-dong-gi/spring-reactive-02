@@ -16,7 +16,10 @@ public class ZipExample03 {
         getInfectedPersonsPerHour(10, 21)
                 .subscribe(tuples -> {
                     Tuple3<Tuple2, Tuple2, Tuple2> t3 = (Tuple3) tuples;
-                    int sum = (int) t3.getT1().getT2() + (int) t3.getT2().getT2() + (int) t3.getT3().getT2();
+                    int sum =
+                            (int) t3.getT1().getT2() +
+                            (int) t3.getT2().getT2() +
+                            (int) t3.getT3().getT2();
                     Logger.onNext(t3.getT1().getT1(), sum);
                 });
         TimeUtils.sleep(6000L);

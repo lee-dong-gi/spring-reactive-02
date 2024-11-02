@@ -14,9 +14,10 @@ public class CollectListExample01 {
     public static void main(String[] args) {
         Flux
             .just("...", "---", "...")
-            .map(code -> transformMorseCode(code))
+            .map(CollectListExample01::transformMorseCode)
             .collectList()
             .subscribe(list -> Logger.onNext(String.join("", list)));
+//            .subscribe(Logger::onNext);
     }
 
     public static String transformMorseCode(String morseCode) {

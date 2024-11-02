@@ -16,7 +16,7 @@ public class FlatMapExample03 {
             .flatMap(dan -> Flux
                                 .range(1, 9)
                                 .publishOn(Schedulers.parallel())
-                                .map(n -> dan + " * " + n + " = " + dan * n))
+                                .map(n -> dan + " * " + n + " = " + dan * n)) // 실행스레드가 바뀌게됨, 순서보장x
 
             .subscribe(Logger::onNext);
 

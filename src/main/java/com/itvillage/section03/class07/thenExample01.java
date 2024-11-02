@@ -9,6 +9,7 @@ import java.time.Duration;
 /**
  * then 기본 개념 예제
  *  - Upstream Mono의 sequence가 종료되면, Mono<Void>를 Downstream으로 전달한다.
+ *  - 하나의 작업(Mono)의 끝난 후 onComplete 시그널을 전송함
  */
 public class thenExample01 {
     public static void main(String[] args) {
@@ -16,9 +17,9 @@ public class thenExample01 {
             .just("Hi")
             .delayElement(Duration.ofSeconds(1))
             .doOnNext(Logger::doOnNext)
-            .then()
+            .then() // onComplete 시그널만 전달
             .subscribe(
-                Logger::onNext,
+                Logger::onNext, // 아무 데이터도 전달안됨
                 Logger::onError,
                 Logger::onComplete
             );

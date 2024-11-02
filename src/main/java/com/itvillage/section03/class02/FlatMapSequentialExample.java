@@ -15,7 +15,7 @@ public class FlatMapSequentialExample {
                 .range(2, 8)
                 .flatMapSequential(dan -> Flux
                                     .range(1, 9)
-                                    .publishOn(Schedulers.parallel())
+                                    .publishOn(Schedulers.parallel()) // 비동기라 순서보장 안되지만 flatMapSequential가 순서를 보장해줌
                                     .map(n -> dan + " * " + n + " = " + dan * n))
 
                 .subscribe(Logger::onNext);

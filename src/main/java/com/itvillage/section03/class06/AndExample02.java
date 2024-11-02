@@ -16,7 +16,7 @@ public class AndExample02 {
         restartApplicationServer()
             .and(restartDBServer())
             .subscribe(
-                    Logger::onNext,
+                    Logger::onNext, // 실행안됨
                     Logger::onError,
                     () -> Logger.onComplete("Send an email to Administrator: " +
                             "All Servers are restarted successfully")

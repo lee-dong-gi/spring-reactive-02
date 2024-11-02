@@ -15,7 +15,7 @@ public class thenExample02 {
         restartApplicationServer()
             .then()
             .subscribe(
-                    Logger::onNext,
+                    Logger::onNext, // 아무 데이터도 안옴
                     Logger::onError,
                     () -> Logger.onComplete("Send an email to Administrator: " +
                             "Application Server is restarted successfully")
@@ -25,10 +25,11 @@ public class thenExample02 {
     }
 
     private static Mono<Void> restartApplicationServer() {
-        return Mono
-                .just("Application Server was restarted successfully.")
-                .delayElement(Duration.ofSeconds(2))
-                .doOnNext(Logger::doOnNext)
-                .flatMap(notUse -> Mono.empty());
+        return Mono.error(new RuntimeException("test"));
+//        return Mono
+//                .just("Application Server was restarted successfully.")
+//                .delayElement(Duration.ofSeconds(2))
+//                .doOnNext(Logger::doOnNext)
+//                .flatMap(notUse -> Mono.empty());
     }
 }

@@ -17,7 +17,7 @@ public class ZipExample02 {
                 .zip(
                         Flux.just(1, 2, 3).delayElements(Duration.ofMillis(300L)),
                         Flux.just(4, 5, 6).delayElements(Duration.ofMillis(500L)),
-                        (n1, n2) -> n1 * n2
+                        (n1, n2) -> n1 * n2 // 결합된 2개의 값을 계산하는 함수
                 )
                 .subscribe(Logger::onNext);
 

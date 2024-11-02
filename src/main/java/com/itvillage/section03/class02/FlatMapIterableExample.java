@@ -15,7 +15,7 @@ import java.util.List;
 public class FlatMapIterableExample {
     public static void main(String[] args) {
         Flux.just(getViralVectorVaccines(), getmRNAVaccines(), getSubunitVaccines())
-                .flatMapIterable(vaccines -> vaccines)
+                .flatMapIterable(vaccines -> vaccines)// list를 벗겨내고 값을 나열 후 emit함
                 .subscribe(Logger::onNext);
     }
 

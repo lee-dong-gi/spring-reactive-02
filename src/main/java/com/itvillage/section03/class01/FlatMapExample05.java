@@ -13,7 +13,11 @@ public class FlatMapExample05 {
         Flux
                 .just("Hello", "World")
                 .map(word -> Mono.just(word))
+
+                // 이게 없으면 Mono.just 오브젝트 자체가 전달되서 toString 되서 출력됨,
+                // flatmap을 쓰면 2개의 mono가 하나로 합쳐짐(평탄화)
                 .flatMap(word -> word)
+
                 .subscribe(Logger::onNext);
     }
 }

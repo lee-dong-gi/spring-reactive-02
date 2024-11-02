@@ -15,9 +15,9 @@ public class ConcatExample03 {
     public static void main(String[] args) {
         Flux
             .concat(
-                Flux.fromIterable(getViralVectorVaccines()),
-                Flux.fromIterable(getmRNAVaccines()),
-                Flux.fromIterable(getSubunitVaccines()))
+                Flux.fromIterable(getViralVectorVaccines()), // A 서버에서 데이터를 가져옴
+                Flux.fromIterable(getmRNAVaccines()), // B 서버에서 데이터를 가져옴
+                Flux.fromIterable(getSubunitVaccines())) // C 서버에서 데이터를 가져옴
             .subscribe(Logger::onNext);
     }
 

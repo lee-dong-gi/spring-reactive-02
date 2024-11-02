@@ -21,7 +21,7 @@ public class FlatMapManyExample {
     public static void main(String[] args) {
         Mono
                 .just(Tuples.of(BUY_PRICE, INVESTMENT_AMOUNT))
-                .flatMapMany(buyInfo -> calculateMaxProfitPerYear(buyInfo))
+                .flatMapMany(buyInfo -> calculateMaxProfitPerYear(buyInfo))// Mono 에서 emit 된 데이터를 Flux 로 변환한다.
                 .subscribe(Logger::onNext);
 
         TimeUtils.sleep(200L);

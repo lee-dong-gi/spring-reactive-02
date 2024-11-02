@@ -12,7 +12,8 @@ public class MapExample03 {
     public static void main(String[] args) {
         Flux
             .just("...", "---", "...")
-            .map(code -> transformMorseCode(code))
+//            .map(code -> transformMorseCode(code))
+            .map(MapExample03::transformMorseCode)
             .subscribe(Logger::onNext);
     }
 

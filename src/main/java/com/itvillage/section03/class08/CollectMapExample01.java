@@ -12,7 +12,10 @@ public class CollectMapExample01 {
     public static void main(String[] args) {
         Flux
                 .range(0, 26)
-                .collectMap(key -> SampleData.morseCodes[key], value -> transformToLetter(value))
+                .collectMap(key
+                        -> SampleData.morseCodes[key], value
+                        -> transformToLetter(value)
+                )
                 .subscribe(map -> Logger.onNext(map));
     }
 
