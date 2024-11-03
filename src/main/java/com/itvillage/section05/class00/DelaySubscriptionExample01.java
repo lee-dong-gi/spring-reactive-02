@@ -17,7 +17,7 @@ public class DelaySubscriptionExample01 {
             .doOnSubscribe(subscription -> Logger.info("# doOnSubscribe > upstream"))
             .delaySubscription(Duration.ofSeconds(2))
             .doOnSubscribe(subscription -> Logger.info("# doOnSubscribe > downstream"))
-            .subscribe(Logger::onNext);
+            .subscribe(Logger::onNext);// 구독 자체가 2초 지연된 후 출력됨
 
         TimeUtils.sleep(2500);
     }

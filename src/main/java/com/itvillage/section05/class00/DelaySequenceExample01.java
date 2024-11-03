@@ -17,7 +17,7 @@ public class DelaySequenceExample01 {
             .doOnSubscribe(subscription -> Logger.doOnSubscribe())
             .delaySequence(Duration.ofSeconds(2))
             .doOnSubscribe(subscription -> Logger.doOnSubscribe())
-            .subscribe(Logger::onNext);
+            .subscribe(Logger::onNext); // 구독 이후 2초 뒤 emit된 데이터 출력
 
         TimeUtils.sleep(2500);
     }

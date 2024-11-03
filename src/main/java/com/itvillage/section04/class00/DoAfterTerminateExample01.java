@@ -11,16 +11,16 @@ import reactor.core.publisher.Flux;
 public class DoAfterTerminateExample01 {
     public static void main(String[] args) {
         Flux
-            .just("HI", "HELLO")
-            .filter(data -> data.equals("HI"))
-            .doOnTerminate(() -> Logger.doOnTerminate("filter"))
-            .doAfterTerminate(() -> Logger.doAfterTerminate("filter"))
-            .map(data -> data.toLowerCase())
-            .doOnTerminate(() -> Logger.doOnTerminate("map"))
-            .doAfterTerminate(() -> Logger.doAfterTerminate("map"))
+            .just("HI", "HELLO") // 0. downstream으로 emit
+            .filter(data -> data.equals("HI")) // 1. HI만 필터링
+            .doOnTerminate(() -> Logger.doOnTerminate("filter")) // 4. filter 시퀀스 종료 시
+            .doAfterTerminate(() -> Logger.doAfterTerminate("filter")) // 8. 시퀀스 전체 종료 후
+            .map(data -> data.toLowerCase()) // 2. HI를 hi로 변환
+            .doOnTerminate(() -> Logger.doOnTerminate("map")) // 5. map 시퀀스 종료 시
+            .doAfterTerminate(() -> Logger.doAfterTerminate("map")) // 7. 시퀀스 전체 종료 후
             .subscribe(
-                    data -> Logger.onNext(data),
+                    data -> Logger.onNext(data), // 3. hi 출력
                     error -> {},
-                    () -> Logger.doOnComplete());
+                    () -> Logger.doOnComplete()); // 6. 시퀀스 전체 종료
     }
 }

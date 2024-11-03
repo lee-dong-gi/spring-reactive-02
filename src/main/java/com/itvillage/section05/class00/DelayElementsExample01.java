@@ -15,8 +15,9 @@ public class DelayElementsExample01 {
     public static void main(String[] args) {
         Flux
             .range(1, 10)
-            .delayElements(Duration.ofMillis(500))
+            //.delayElements(Duration.ofMillis(500)) // upsteram에서 전달온 data emit을 500ms 만큼 지연시킴, doOnNext와 onNext 시간이 거의 동일함
             .doOnNext(num -> Logger.doOnNext(num))
+            .delayElements(Duration.ofMillis(500)) // 구독할때 500ms 만큼 지연시킴, doOnNext와 onNext 시간이 500ms 만큼 차이가남
             .subscribe(Logger::onNext);
 
         TimeUtils.sleep(6000);

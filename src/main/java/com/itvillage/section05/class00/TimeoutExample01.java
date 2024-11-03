@@ -13,9 +13,9 @@ import java.time.Duration;
 public class TimeoutExample01 {
     public static void main(String[] args) {
         requestToServer()
-                .timeout(Duration.ofSeconds(2))
+                .timeout(Duration.ofSeconds(2)) // timeout 발생
                 .subscribe(response -> Logger.onNext(response),
-                        error -> Logger.onError(error));
+                        error -> Logger.onError(error)); // timeout 에러 전달 받음
 
         TimeUtils.sleep(3500);
     }
