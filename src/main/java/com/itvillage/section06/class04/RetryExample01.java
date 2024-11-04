@@ -20,17 +20,17 @@ public class RetryExample01 {
             .map(num -> {
                 if (num == 3 && count[0] == 1) {
                     count[0]++;
-                    TimeUtils.sleep(1000);
+                    TimeUtils.sleep(1000); // 3인 경우 1초 추가시간 소요되어서 실패함 retry에서 다시 1,2,3을 emit하게 함
                 }
 
                 return num;
             })
             .timeout(Duration.ofMillis(1500))
-            .retry(1)
+            .retry(1) // 1번만 재시도함
             .subscribe(Logger::onNext,
                     Logger::onError,
                     Logger::onComplete);
 
-        TimeUtils.sleep(7000);
+        TimeUtils.sleep(8000);
     }
 }

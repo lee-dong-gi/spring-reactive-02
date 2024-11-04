@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class RetryExample02 {
     public static void main(String[] args) throws InterruptedException {
         getAllBooksFromRemoteDB()
-                .collect(Collectors.toSet())
+                .collect(Collectors.toSet()) // 이미 emit 된 data는 제거해서 중복제거한 후에 subscribe쪽에 보냄
                 .subscribe(bookSet ->
                                 bookSet.stream()
                                         .forEach(book -> Logger.onNext("book name: {}, price: {}",
@@ -36,9 +36,7 @@ public class RetryExample02 {
                         if (count[0] == 3) {
                             Thread.sleep(2000);
                         }
-                    } catch (InterruptedException e) {
-
-                    }
+                    } catch (InterruptedException ignored) {}
 
                     return book;
                 })

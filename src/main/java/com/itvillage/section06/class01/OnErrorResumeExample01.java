@@ -17,7 +17,7 @@ public class OnErrorResumeExample01 {
     public static void main(String[] args) {
         final String keyword = "DDD";
         getBooksFromCache(keyword)
-                .onErrorResume(error -> getBooksFromDatabase(keyword))
+                .onErrorResume(error -> getBooksFromDatabase(keyword)) // NoSuchBookException 시그널을 전달받아 실행됨
                 .subscribe(data -> Logger.onNext(data.getBookName()),
                         Logger::onError);
     }
@@ -25,15 +25,18 @@ public class OnErrorResumeExample01 {
     private static Flux<Book> getBooksFromCache(final String keyword) {
         return Flux
                 .fromIterable(SampleData.books)
-                .filter(book -> book.getBookName().contains(keyword))
-                .switchIfEmpty(Flux.error(new NoSuchBookException("No such Book")));
+                .filter(book -> book.getBookName().contains(keyword)) // DDD라는 도서명은 없음
+                .switchIfEmpty(Flux.error(new NoSuchBookException("No such Book"))); // 이게 작동함
     }
 
     private static Flux<Book> getBooksFromDatabase(final String keyword) {
         List<Book> books = new ArrayList<>(SampleData.books);
+        
+        // 만약 해당 코드가 없다면 subscribe쪽에 NoSuchBookException 시그널이 전송됨
         books.add(new Book(11, "DDD: Domain Driven Design",
                 "Joy", "ddd-man", 35000, 200));
-        return Flux
+
+        return Flux // 대체 Publisher 동작
                 .fromIterable(books)
                 .filter(book -> book.getBookName().contains(keyword))
                 .switchIfEmpty(Flux.error(new NoSuchBookException("No such Book")));

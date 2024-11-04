@@ -1,4 +1,4 @@
-package com.itvillage.section03.class01;
+package com.itvillage.section06.class03;
 
 import com.itvillage.common.TimezoneNotFoundException;
 import com.itvillage.utils.Logger;
@@ -32,7 +32,7 @@ public class OnErrorMapExample02 {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-        Mono.fromSupplier(() ->
+        Mono.fromSupplier(() -> // fromSupplier는 http 통신중 발생하는 error downstream쪽으로 내려 올 수 있음
                         restTemplate.exchange(WORLD_TIME_URI, HttpMethod.GET, new HttpEntity<String>(headers), String.class)
                 )
                 .onErrorMap(HttpClientErrorException.class, (HttpClientErrorException ex) -> {

@@ -16,8 +16,9 @@ public class OnErrorReturnExample02 {
     public static void main(String[] args) {
         getBooks()
                 .map(book -> book.getPenName().toUpperCase())
-                .onErrorReturn(NullPointerException.class, "no pen name")
                 .onErrorReturn(IllegalFormatException.class, "Illegal pen name")
+                .onErrorReturn(Exception.class, "unknown pen name") // 여기서 걸림
+                .onErrorReturn(NullPointerException.class, "no pen name")
                 .subscribe(Logger::info, Logger::onError);
     }
 

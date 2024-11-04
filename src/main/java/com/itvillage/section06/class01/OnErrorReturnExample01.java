@@ -14,8 +14,8 @@ import reactor.core.publisher.Flux;
 public class OnErrorReturnExample01 {
     public static void main(String[] args) {
         getBooks()
-                .map(book -> book.getPenName().toUpperCase())
-                .onErrorReturn("No pen name")
+                .map(book -> book.getPenName().toUpperCase()) // 필명은 필수값이 아니라 NPE 발생
+                .onErrorReturn("No pen name")// NPE발생 시 해당 값 리턴
                 .subscribe(Logger::info, Logger::onError);
     }
 
