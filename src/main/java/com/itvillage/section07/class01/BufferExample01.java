@@ -12,7 +12,7 @@ public class BufferExample01 {
     public static void main(String[] args) {
         Flux
             .range(1, 95)
-            .buffer(10)
+            .buffer(10) // 10만큼 채워지면 10씩 emit됨, 다 안채워지고 sequence가 종료되면 찬 만큼 emit됨
             .subscribe(buffer -> Logger.onNext(buffer));
     }
 }

@@ -25,7 +25,7 @@ public class BufferTimeoutExample01 {
                 } catch (InterruptedException e) {}
                 return num;
             })
-            .bufferTimeout(3, Duration.ofMillis(400L))
+            .bufferTimeout(3, Duration.ofMillis(400L)) // 400ms 동안 기다리고 버퍼가 다 차거나 400ms가 지나면 무조건 flush
             .subscribe(buffer -> Logger.onNext(buffer));
     }
 }

@@ -16,11 +16,11 @@ public class GroupByExample03 {
             .groupBy(book -> book.getAuthorName())
             .flatMap(groupedFlux ->
                     Mono
-                        .just(groupedFlux.key())
+                        .just(groupedFlux.key()) // book.authorName
                         .zipWith(
                                 groupedFlux
                                         .map(book -> (int)(book.getPrice() * book.getStockQuantity() * 0.1))
-                                        .reduce((y1, y2) -> y1 + y2),
+                                        .reduce((y1, y2) -> y1 + y2), // 스트림의 모든 요소를 하나의 결과로 축약, 모든 책의 0.1 배의 가격과 수량을 곱한 값을 합산하여 반환
                                 (authorName, sumRoyalty) -> authorName + "'s royalty: " + sumRoyalty)
             )
             .subscribe(Logger::onNext);

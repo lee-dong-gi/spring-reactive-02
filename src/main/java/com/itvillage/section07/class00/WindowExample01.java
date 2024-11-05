@@ -15,7 +15,7 @@ public class WindowExample01 {
     public static void main(String[] args) {
         Flux
             .range(1, 11)
-            .window(3)
+            .window(3) // 3개 만큼 새로운 flux로 분할함, downstream에서 요청한 개수 x maxSize만큼의 개수가 upstream에 요청됨
             .flatMap(flux -> {
                 Logger.info("======================");
                 return flux;

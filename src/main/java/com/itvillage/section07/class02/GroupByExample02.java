@@ -13,8 +13,8 @@ public class GroupByExample02 {
     public static void main(String[] args) {
         Flux
             .fromIterable(SampleData.books)
-            .groupBy(book -> book.getAuthorName(),
-                    book -> book.getBookName() + "(" + book.getAuthorName() + ")")
+            .groupBy(book -> book.getAuthorName(), // 저자를 기준으로 그룹핑
+                    book -> book.getBookName() + "(" + book.getAuthorName() + ")") // flatMap에 데이터를 가공한 문자열이 전달됨
             .flatMap(groupedFlux -> groupedFlux.collectList())
             .subscribe(booksByAuthor ->
                     Logger.onNext(booksByAuthor));
