@@ -20,7 +20,7 @@ public class ReplayExample02 {
                 Flux
                     .range(1, 5)
                     .delayElements(Duration.ofMillis(300L))
-                    .replay(2);
+                    .replay(2); // 이미 emit된 데이터중 가장 마지막으로 지나간 2개를 캐싱하고 내려줌
 
         TimeUtils.sleep(500L);
         flux.subscribe(data -> Logger.onNext("subscriber1: ", data));
@@ -31,7 +31,7 @@ public class ReplayExample02 {
         flux.connect();
 
         TimeUtils.sleep(1000L);
-        flux.subscribe(data -> Logger.onNext("subscriber3: ", data));
+        flux.subscribe(data -> Logger.onNext("subscriber3: ", data));// 이미 emit된 데이터중 가장 마지막으로 지나간 2,3을 받음
 
         TimeUtils.sleep(2000L);
     }
